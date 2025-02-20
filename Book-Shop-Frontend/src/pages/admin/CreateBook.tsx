@@ -2,10 +2,18 @@ import { Button, Col, Row } from "antd";
 import { FieldValues } from "react-hook-form";
 import BSForm from "../../components/form/BSForm";
 import BSInput from "../../components/form/BSInput";
+import { useAddBookMutation } from "../../redux/features/bookManagement/bookApi";
 
 const CreateBook = () => {
+  const [addBook, { data, error }] = useAddBookMutation();
+  console.log(data);
+  console.log(error);
   const onSubmit = async (data: FieldValues) => {
     console.log(data);
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+
+    addBook(data);
   };
 
   return (

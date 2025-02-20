@@ -6,6 +6,7 @@ import Home from "../components/Home/Home";
 import OrderHistory from "../pages/user/OrderHistory";
 import AccountDetails from "../pages/user/AccountDetails";
 import Books from "../pages/Books";
+import CheakoutPage from "../pages/user/CheakoutPage";
 
 type TNavbarItem = {
   key: string;
@@ -36,6 +37,11 @@ export const userDashboardPath = [
     name: "Order History",
     path: "order-history",
     element: <OrderHistory></OrderHistory>,
+  },
+  {
+    name: "Checkout",
+    path: "checkout",
+    element: <CheakoutPage></CheakoutPage>,
   },
   {
     name: "Account Details ",

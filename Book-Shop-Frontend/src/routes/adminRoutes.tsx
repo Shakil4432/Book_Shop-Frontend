@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateBook from "../pages/admin/CreateBook";
-import Books from "../pages/Books";
+
 import Users from "../pages/admin/Users";
 
 type TAdminPath = {
@@ -21,11 +21,6 @@ export const adminPaths = [
   {
     name: "Book Management",
     children: [
-      {
-        name: "Books",
-        path: "books",
-        element: <Books></Books>,
-      },
       {
         name: "Create Book",
         path: "create-book",

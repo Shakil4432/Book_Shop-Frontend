@@ -8,6 +8,8 @@ import { userCommonPaths, userDashboardPath } from "./userRoutes";
 import Dashboard from "../components/layouts/Dashboard";
 import { adminPaths } from "./adminRoutes";
 import ProtectedRoute from "../components/layouts/ProtectedRoute";
+import BookDetails from "../pages/BookDetails";
+import UpdateBook from "../pages/UpdateBook";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,16 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login></Login>,
+  },
+  {
+    path: "/book/:id",
+    element: <BookDetails></BookDetails>,
+  },
+  {
+    path: "/update-book/:id",
+    element: <ProtectedRoute>
+      <UpdateBook></UpdateBook>
+    </ProtectedRoute>,
   },
   {
     path: "/register",

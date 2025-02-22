@@ -20,17 +20,19 @@ const Register = () => {
     const toastId = toast.loading("Registering...");
     try {
       const res = await registerUser(formData).unwrap();
-      console.log("API Response:", res);
-
       const user = verifyToken(res.data.token);
-      console.log("Decoded User:", user);
-
       dispatch(setUser({ user, token: res.data.token }));
-      toast.success("Registration successful!", { id: toastId, duration: 2000 });
+      toast.success("Registration successful!", {
+        id: toastId,
+        duration: 2000,
+      });
       navigate(`/dashboard`);
     } catch (err: any) {
       console.error("Registration Error:", err);
-      toast.error(err?.data?.message || "Something went wrong", { id: toastId, duration: 2000 });
+      toast.error(err?.data?.message || "Something went wrong", {
+        id: toastId,
+        duration: 2000,
+      });
     }
   };
 

@@ -8,7 +8,7 @@ import { userDashboardPath } from "../../routes/userRoutes";
 import { useAppSelector } from "../../redux/hooks";
 import { currentUser } from "../../redux/features/auth/authSlice";
 
-type TUser = {
+export type TUser = {
   email: string;
   role: "admin" | "user";
 };

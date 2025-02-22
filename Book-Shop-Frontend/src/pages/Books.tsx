@@ -12,6 +12,7 @@ import {
 } from "antd";
 import { useGetAllBooksQuery } from "../redux/features/bookManagement/bookApi";
 import { TBook } from "../types/TBook";
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 const { Search } = Input;
@@ -23,13 +24,12 @@ const Books = () => {
   const [sortBy, setSortBy] = useState("");
   const [filterBrand, setFilterBrand] = useState("");
 
- 
   const { data, isLoading, isError } = useGetAllBooksQuery({
     brand: filterBrand || undefined,
     search: searchTerm || undefined,
     sort: sortBy || undefined,
-    page, 
-    limit: 8, 
+    page,
+    limit: 8,
   });
 
   const books: TBook[] = data?.data?.result || [];
@@ -76,11 +76,13 @@ const Books = () => {
 
   if (sortBy === "createdAt-asc") {
     sortedBooks.sort(
-      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
     );
   } else if (sortBy === "createdAt-desc") {
     sortedBooks.sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
   }
 
@@ -102,7 +104,6 @@ const Books = () => {
         Explore Our Books
       </Title>
 
-     
       <div
         style={{
           textAlign: "center",
@@ -151,7 +152,6 @@ const Books = () => {
         </Select>
       </div>
 
-     
       {sortedBooks.length === 0 ? (
         <div style={{ textAlign: "center", marginTop: "50px" }}>
           <Empty description="No books found" />
@@ -161,77 +161,81 @@ const Books = () => {
           <Row gutter={[24, 24]} justify="center">
             {sortedBooks.map((book: TBook, index: number) => (
               <Col key={index} xs={24} sm={12} md={8} lg={6}>
-                <Card
-                  hoverable
-                  cover={
-                    <img
-                      alt={book.name}
-                      src={book.image || "https://via.placeholder.com/200"}
+                <Link to={`/book/${book._id}`}>
+                  <Card
+                    hoverable
+                    cover={
+                      <img
+                        alt={book.name}
+                        src={book.image || "https://via.placeholder.com/200"}
+                        style={{
+                          height: "280px",
+                          objectFit: "cover",
+                          borderTopLeftRadius: "10px",
+                          borderTopRightRadius: "10px",
+                        }}
+                      />
+                    }
+                    style={{
+                      borderRadius: "10px",
+                      overflow: "hidden",
+                      boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+                      transition: "transform 0.3s ease-in-out",
+                      textAlign: "center",
+                      backgroundColor: "#fff",
+                    }}
+                    bodyStyle={{ padding: "20px" }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.transform = "scale(1.05)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.transform = "scale(1)")
+                    }
+                  >
+                    <Title
+                      level={4}
+                      style={{ color: "#e7995e", marginBottom: "10px" }}
+                    >
+                      {book.name}
+                    </Title>
+                    <p
                       style={{
-                        height: "280px",
-                        objectFit: "cover",
-                        borderTopLeftRadius: "10px",
-                        borderTopRightRadius: "10px",
+                        fontSize: "16px",
+                        fontWeight: "500",
+                        color: "#444",
                       }}
-                    />
-                  }
-                  style={{
-                    borderRadius: "10px",
-                    overflow: "hidden",
-                    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-                    transition: "transform 0.3s ease-in-out",
-                    textAlign: "center",
-                    backgroundColor: "#fff",
-                  }}
-                  bodyStyle={{ padding: "20px" }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.transform = "scale(1.05)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.transform = "scale(1)")
-                  }
-                >
-                  <Title
-                    level={4}
-                    style={{ color: "#e7995e", marginBottom: "10px" }}
-                  >
-                    {book.name}
-                  </Title>
-                  <p
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "#444",
-                    }}
-                  >
-                    <strong>Brand:</strong> {book.brand}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: "500",
-                      color: "#444",
-                    }}
-                  >
-                    <strong>Price:</strong> ${book.price}
-                  </p>
-                  <p style={{ fontSize: "14px", color: "#666" }}>
-                    <strong>Stock:</strong> {book.stock}
-                  </p>
-                </Card>
+                    >
+                      <strong>Brand:</strong> {book.brand}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "16px",
+                        fontWeight: "500",
+                        color: "#444",
+                      }}
+                    >
+                      <strong>Price:</strong> ${book.price}
+                    </p>
+                    <p style={{ fontSize: "14px", color: "#666" }}>
+                      <strong>Stock:</strong> {book.stock}
+                    </p>
+                  </Card>
+                </Link>
               </Col>
             ))}
           </Row>
 
-       
-          <div className="flex item-center justify-center" style={{ textAlign: "center", marginTop: "30px" }}>
+          <div
+            className="flex item-center justify-center"
+            style={{ textAlign: "center", marginTop: "30px" }}
+          >
             <Pagination
               current={page}
               pageSize={metaData?.limit}
               total={metaData?.total}
               onChange={(value) => setPage(value)}
-              showSizeChanger={false} 
-              showQuickJumper={false} 
+              showSizeChanger={false}
+              showQuickJumper={false}
               hideOnSinglePage={false}
             />
           </div>

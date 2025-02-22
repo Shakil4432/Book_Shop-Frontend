@@ -10,27 +10,37 @@ const bookApi = baseApi.injectEndpoints({
       }),
     }),
     getAllBooks: builder.query({
-      query: (args) => {
-        const params = new URLSearchParams();
-    
-        // Dynamically append each key-value pair in args to URLSearchParams
-        for (const [key, value] of Object.entries(args)) {
-          if (value) {
-            params.append(key, value as string);
-          }
-        }
-    
-        console.log(params.toString()); // Check the query params
-    
-        return {
-          url: "/products",
-          method: "GET",
-          params, // Attach the URLSearchParams as query params
-        };
-      },
+      query: () => ({
+        url: "/products",
+        method: "GET",
+      }),
     }),
-    
+    getBookById: builder.query({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "GET",
+      }),
+    }),
+    updateBook: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `/products/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+    deleteBook: builder.mutation({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useAddBookMutation, useGetAllBooksQuery } = bookApi;
+export const { 
+  useAddBookMutation, 
+  useGetAllBooksQuery, 
+  useGetBookByIdQuery,
+  useUpdateBookMutation,
+  useDeleteBookMutation, 
+} = bookApi;

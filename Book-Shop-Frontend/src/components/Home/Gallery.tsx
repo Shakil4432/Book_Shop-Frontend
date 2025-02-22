@@ -13,7 +13,12 @@ const images = [
 const Gallery = () => {
   return (
     <div className="overflow-hidden w-full">
-      <h2 className="text-3xl text-center font-semibold text-gray-800 mt-4 mb-12">
+      {/* Main Heading */}
+      <h1 className="text-4xl text-center font-bold text-[#e7995e] mb-4">
+        Explore Our Collection of Books
+      </h1>
+      {/* Subheading */}
+      <h2 className="text-sm text-center font-semibold text-gray-800 mt-4 mb-12">
         Books Gallery
       </h2>
       <motion.div
@@ -40,3 +45,6 @@ const Gallery = () => {
 };
 
 export default Gallery;
+
+
+

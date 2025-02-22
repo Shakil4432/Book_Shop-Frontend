@@ -224,7 +224,7 @@ const Books = () => {
           </Row>
 
        
-          <div style={{ textAlign: "center", marginTop: "30px" }}>
+          <div className="flex item-center justify-center" style={{ textAlign: "center", marginTop: "30px" }}>
             <Pagination
               current={page}
               pageSize={metaData?.limit}

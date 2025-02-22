@@ -1,11 +1,20 @@
 import { Card, Button } from "antd";
 
+
+
 const Pricing = () => {
   return (
     <div>
-      <h2 className="text-3xl font-semibold py-12 text-center">
+      {/* Main Heading */}
+      <h1 className="text-4xl font-bold text-center text-[#e7995e] mt-12 mb-2">
+        Choose Your Perfect Plan
+      </h1>
+      
+      {/* Subheading */}
+      <h2 className="text-sm font-semibold pb-6 text-center">
         Book Store Pricing
       </h2>
+
       <section className="py-16 px-4" style={{ backgroundColor: "#f4e1d2" }}>
         <div className="max-w-6xl mx-auto text-center">
           <div className="flex flex-wrap justify-center gap-8">
@@ -121,3 +130,6 @@ const Pricing = () => {
 };
 
 export default Pricing;
+
+
+

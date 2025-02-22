@@ -22,12 +22,10 @@ const FooterComponent = () => {
       style={{
         backgroundColor: "#f4e1d2",
         padding: "40px 20px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+       
       }}
     >
-      <div className="max-w-6xl h-[40vh] mx-auto text-center mt-24">
+      <div className="max-w-6xl  h-auto mx-auto text-center mt-24">
         <h2 className="text-4xl font-semibold" style={{ color: "#e7995e" }}>
           BookView
         </h2>
@@ -35,7 +33,40 @@ const FooterComponent = () => {
           Your one-stop shop for amazing books!
         </p>
 
-        <div className="flex justify-center space-x-6 mt-4">
+        <div className="mt-8 flex item-center justify-center gap-24">
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold" style={{ color: "#e7995e" }}>
+              About Us
+            </h3>
+            <p className="text-gray-600 w-80 text-center">
+              BookView offers a wide range of books from all genres to cater to your reading needs. Enjoy a seamless borrowing experience with our membership plans.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold" style={{ color: "#e7995e" }}>
+              Quick Links
+            </h3>
+            <ul className="text-gray-600 space-y-2">
+              <li>Home</li>
+              <li>Books</li>
+              <li>Pricing</li>
+              <li>Contact</li>
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold" style={{ color: "#e7995e" }}>
+              Contact Us
+            </h3>
+            <p className="text-gray-600">Email: support@bookview.com</p>
+            <p className="text-gray-600">Phone: +123 456 789</p>
+          </div>
+        </div>
+
+       
+      </div>
+      <div className="flex justify-center space-x-6 mt-8">
           {socialLinks.map((social, index) => (
             <motion.a
               key={index}
@@ -50,10 +81,9 @@ const FooterComponent = () => {
           ))}
         </div>
 
-        <p className="text-gray-600 mt-6">
+        <p className="text-gray-600 mt-6 text-center">
           © {new Date().getFullYear()} BookView. All rights reserved.
         </p>
-      </div>
     </Footer>
   );
 };

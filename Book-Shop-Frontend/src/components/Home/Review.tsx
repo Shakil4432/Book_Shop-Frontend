@@ -34,14 +34,53 @@ const reviews = [
     comment:
       "A wonderful collection of books with a seamless borrowing process. Will definitely subscribe again!",
   },
+  {
+    id: 5,
+    name: "Emma Thompson",
+    avatar: "https://i.pravatar.cc/100?img=5",
+    rating: 5,
+    comment:
+      "The collection is impressive! I found so many books I’ve been looking for. The customer service is also amazing!",
+  },
+  {
+    id: 6,
+    name: "James Smith",
+    avatar: "https://i.pravatar.cc/100?img=6",
+    rating: 4,
+    comment:
+      "A great experience overall. The pricing is fair, and the books are great quality. Just wish there were more genres.",
+  },
+  {
+    id: 7,
+    name: "Olivia Brown",
+    avatar: "https://i.pravatar.cc/100?img=7",
+    rating: 5,
+    comment:
+      "I’m hooked! The variety is amazing, and the unlimited books are perfect for my reading habit. Highly recommend!",
+  },
+  {
+    id: 8,
+    name: "David Wilson",
+    avatar: "https://i.pravatar.cc/100?img=8",
+    rating: 4,
+    comment:
+      "I’m really satisfied with the service. The premium plan is fantastic, and the borrowing process is simple and quick.",
+  },
 ];
 
 const Review = () => {
   return (
     <div className="overflow-hidden w-full py-20 px-4">
-      <h2 className="text-3xl text-center font-semibold mb-12">
+      {/* Main Heading */}
+      <h1 className="text-4xl font-bold text-center text-[#e7995e] mt-12 mb-4">
+        What Our Customers Say
+      </h1>
+      
+      {/* Subheading */}
+      <h2 className="text-sm text-center font-semibold mb-12">
         Customer Reviews
       </h2>
+
       <motion.div
         className="flex space-x-4 cursor-grab"
         drag="x"

@@ -28,14 +28,18 @@ const OurServices = () => {
   return (
     <section className="bg-gray-100 py-12">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-semibold text-gray-800 mt-4 mb-12">
-          Our Services
+        {/* Main Heading */}
+        <h2 className="text-4xl font-bold text-[#e7995e] mb-4">
+          Discover Our Outstanding Services
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8  ">
+        <h3 className="text-sm font-semibold text-gray-800 mb-12">
+          We Offer a Variety of Services to Enhance Your Book Shopping Experience
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <div
               key={index}
-              className=" p-6 rounded-lg shadow-lg text-center bg-[#f5f5f5]"
+              className="p-6 rounded-lg shadow-lg text-center bg-[#f5f5f5]"
             >
               <div className="text-4xl mb-4 text-[#e7995e]">{service.icon}</div>
               <h3 className="text-xl font-semibold text-[#e7995e] mb-4">
@@ -51,3 +55,6 @@ const OurServices = () => {
 };
 
 export default OurServices;
+
+
+

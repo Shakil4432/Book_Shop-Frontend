@@ -2,14 +2,34 @@ import { baseApi } from "../../api/baseApi";
 
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllUser: builder.query({
-      query: (users) => ({
-        url: "/auth/users",
+    getUserProfile: builder.query({
+      query: () => "/user",
+    }),
+    updateUserProfile: builder.mutation({
+      query: (userData) => ({
+        url: "/user",
+        method: "PUT",
+        body: userData,
+      }),
+    }),
+    getSingleUser: builder.query({
+      query: (email) => ({
+        url: `/user/${email}`,
         method: "GET",
-        body: users,
+      }),
+    }),
+    deleteUser: builder.mutation({
+      query: (email) => ({
+        url: `/user/${email}`,
+        method: "DELETE",
       }),
     }),
   }),
 });
 
-export const { useGetAllUserQuery } = userApi;
+export const {
+  useGetUserProfileQuery,
+  useGetSingleUserQuery,
+  useUpdateUserProfileMutation,
+  useDeleteUserMutation,
+} = userApi;

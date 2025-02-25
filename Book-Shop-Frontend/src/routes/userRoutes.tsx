@@ -3,10 +3,10 @@ import AboutUs from "../pages/AboutUs";
 
 import { NavLink } from "react-router-dom";
 import Home from "../components/Home/Home";
-import OrderHistory from "../pages/user/OrderHistory";
 import AccountDetails from "../pages/user/AccountDetails";
 import Books from "../pages/Books";
 import CheakoutPage from "../pages/user/CheakoutPage";
+import Order from "../pages/user/OrderHistory";
 
 type TNavbarItem = {
   key: string;
@@ -36,7 +36,7 @@ export const userDashboardPath = [
   {
     name: "Order History",
     path: "order-history",
-    element: <OrderHistory></OrderHistory>,
+    element: <Order></Order>,
   },
   {
     name: "Checkout",

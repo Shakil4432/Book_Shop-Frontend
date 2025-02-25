@@ -19,27 +19,42 @@ const Login = () => {
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Logging in...");
+  
     try {
-      const res = await login(data).unwrap();
-      const user = verifyToken(res.data.token);
-     
-      dispatch(setUser({ user: user, token: res.data.token }));
-      toast.success("Logged in", { id: toastId, duration: 2000 });
-      navigate(`/dashboard`);
-    } catch (error: any) {
-      if (error?.data?.message === "User not found") {
-        toast.error("You have no account. Please register first.", {
-          id: toastId,
-          duration: 3000,
-        });
-        setTimeout(() => {
-          navigate("/register"); 
-        }, 2000);
-      } else {
-        toast.error("Something went wrong", { id: toastId, duration: 2000 });
+      const res = await login(data).unwrap(); // Wait for login response
+  
+      if (!res?.data?.token) {
+        throw new Error("Invalid login response");
       }
+  
+      const user = verifyToken(res.data.token);
+      if (!user) {
+        throw new Error("Token verification failed");
+      }
+  
+      // Store user and token in localStorage
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", res.data.token);
+  
+      // Update Redux state
+      dispatch(setUser({ user, token: res.data.token }));
+  
+      toast.success("Logged in", { id: toastId, duration: 2000 });
+  
+      // Delay navigation slightly to ensure state update
+      setTimeout(() => {
+        navigate(`/dashboard`);
+      }, 500);
+  
+    } catch (error: any) {
+      toast.error(error.message || "Something went wrong", {
+        id: toastId,
+        duration: 2000,
+      });
     }
   };
+  
+  
   
 
   return (

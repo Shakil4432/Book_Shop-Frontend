@@ -11,6 +11,9 @@ import ProtectedRoute from "../components/layouts/ProtectedRoute";
 import BookDetails from "../pages/BookDetails";
 import UpdateBook from "../pages/UpdateBook";
 
+import CartPage from "../pages/CartPage";
+import VerifyOrder from "../pages/VerifyOrder";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,10 +43,25 @@ const router = createBrowserRouter([
     element: <BookDetails></BookDetails>,
   },
   {
+    path: "/order/verify",
+    element: <VerifyOrder></VerifyOrder>,
+  },
+  {
     path: "/update-book/:id",
-    element: <ProtectedRoute>
-      <UpdateBook></UpdateBook>
-    </ProtectedRoute>,
+    element: (
+      <ProtectedRoute>
+        <UpdateBook></UpdateBook>
+      </ProtectedRoute>
+    ),
+  },
+
+  {
+    path: "/cart",
+    element: (
+      <ProtectedRoute>
+        <CartPage></CartPage>
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/register",

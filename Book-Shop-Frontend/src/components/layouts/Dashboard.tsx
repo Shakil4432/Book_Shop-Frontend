@@ -6,9 +6,10 @@ import { adminPaths } from "../../routes/adminRoutes";
 import { Navigate, Outlet } from "react-router-dom";
 import { userDashboardPath } from "../../routes/userRoutes";
 import { useAppSelector } from "../../redux/hooks";
-import { currentUser } from "../../redux/features/auth/authSlice";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 
 export type TUser = {
+  _id:string
   email: string;
   role: "admin" | "user";
 };
@@ -16,7 +17,7 @@ export type TUser = {
 const { Sider } = Layout;
 
 const Dashboard = () => {
-  const user = useAppSelector(currentUser) as TUser | null;
+  const user = useAppSelector(selectCurrentUser) as TUser | null;
 
   console.log(user);
   if (!user) {

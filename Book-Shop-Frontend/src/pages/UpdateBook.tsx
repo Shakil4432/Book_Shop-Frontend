@@ -1,27 +1,51 @@
 import { Button, Col, Row } from "antd";
 import { FieldValues } from "react-hook-form";
 
-import { useParams } from "react-router-dom";
-import { useGetBookByIdQuery, useUpdateBookMutation } from "../redux/features/bookManagement/bookApi";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useGetBookByIdQuery,
+  useUpdateBookMutation,
+} from "../redux/features/bookManagement/bookApi";
 import BSForm from "../components/form/BSForm";
 import BSInput from "../components/form/BSInput";
-
+import { useAppSelector } from "../redux/hooks";
+import { useCurrentToken } from "../redux/features/auth/authSlice";
 
 const UpdateBook = () => {
   const { id } = useParams();
-  const { data: bookData, isLoading } = useGetBookByIdQuery(id);
+  const navigate = useNavigate()
+  const { data: bookData, isLoading,refetch } = useGetBookByIdQuery(id);
   const [updateBook, { data, error }] = useUpdateBookMutation();
 
+ const token = useAppSelector(useCurrentToken)
+  console.log(token)
   console.log(data);
   console.log(error);
+ 
 
-  // Handle form submission
   const onSubmit = async (formData: FieldValues) => {
-    console.log(formData);
-    updateBook({ id, ...formData });
+
+    try {
+      await updateBook({
+        id,
+        ...formData,
+        price: Number(formData.price),
+        stock: Number(formData.stock),
+        token
+       
+      });
+     
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
+   
+    refetch();
+    navigate("/books")
+
   };
 
-  // If loading, show nothing
   if (isLoading) {
     return <p className="text-center text-gray-500">Loading...</p>;
   }

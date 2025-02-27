@@ -1,17 +1,17 @@
 import React from "react";
-import { Card, Col, Typography, Button, Modal, message } from "antd"; // Assuming TUser is defined in your types
-import { UserOutlined } from "@ant-design/icons"; // For the default avatar icon
+import { Card, Col, Typography, Button, Modal, message } from "antd"; 
+import { UserOutlined } from "@ant-design/icons"; 
 import { TUserCard } from "../../types/TUserCard";
 import { useDeleteUserMutation, useUpdateUserMutation } from "../../redux/features/userManagement/userApi";
 import { useAppSelector } from "../../redux/hooks";
 import { useCurrentToken } from "../../redux/features/auth/authSlice";
-// Add API hooks
+
 
 const { Title } = Typography;
 
 interface UserCardProps {
   user: TUserCard;
-  isAdmin: boolean; // To check if the current user is an admin
+  isAdmin: boolean; 
 }
 
 const UserCard: React.FC<UserCardProps> = ({ user, isAdmin }) => {
@@ -36,12 +36,10 @@ const UserCard: React.FC<UserCardProps> = ({ user, isAdmin }) => {
   };
 
   const handleUpdate = (userId:string) => {
-    // Handle user update (could be a form or redirect to a page)
-    // Example: Open a modal or navigate to a user edit page
-    // For now, we'll just log the user
+    
     updateUser({id:userId})
     console.log("Update user:", user);
-    message.info("This is where you update the user.");
+   
   };
 
   return (
@@ -91,7 +89,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, isAdmin }) => {
         </div>
        
 
-        {/* Admin actions (Update and Delete) */}
+       
         {isAdmin && (
           <div style={{ marginTop: "15px" }}>
             <Button

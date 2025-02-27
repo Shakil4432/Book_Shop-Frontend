@@ -54,7 +54,7 @@ const userApi = baseApi.injectEndpoints({
 
     deleteUser: builder.mutation({
       query: ({ id, token }) => ({
-        url: `/user/${id}`,
+        url: `/users/${id}`,
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

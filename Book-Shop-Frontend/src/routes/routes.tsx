@@ -11,8 +11,9 @@ import ProtectedRoute from "../components/layouts/ProtectedRoute";
 import BookDetails from "../pages/BookDetails";
 import UpdateBook from "../pages/UpdateBook";
 
-import CartPage from "../pages/CartPage";
+
 import VerifyOrder from "../pages/VerifyOrder";
+import CartPage from "../pages/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
     path: "/cart",
     element: (
       <ProtectedRoute>
-        <CartPage></CartPage>
+       <CartPage></CartPage>
       </ProtectedRoute>
     ),
   },

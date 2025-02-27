@@ -35,10 +35,11 @@ const UserCard: React.FC<UserCardProps> = ({ user, isAdmin }) => {
     });
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = (userId:string) => {
     // Handle user update (could be a form or redirect to a page)
     // Example: Open a modal or navigate to a user edit page
     // For now, we'll just log the user
+    updateUser({id:userId})
     console.log("Update user:", user);
     message.info("This is where you update the user.");
   };
@@ -95,7 +96,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, isAdmin }) => {
           <div style={{ marginTop: "15px" }}>
             <Button
               type="primary"
-              onClick={handleUpdate}
+              onClick={()=>handleUpdate(user._id)}
               style={{ marginRight: "10px", backgroundColor: "#4CAF50", borderColor: "#4CAF50" }}
             >
               Update

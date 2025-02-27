@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 import Cart from './Cart';
 import { TCartItem } from '../types/TBook';
@@ -23,6 +24,7 @@ const CartPage: React.FC = () => {
     <div>
      
       <Cart
+      // @ts-ignore
         cartItems={cartItems}
         onRemoveItem={handleRemoveItem}
         onUpdateItemQuantity={handleUpdateItemQuantity}

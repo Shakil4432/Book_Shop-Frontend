@@ -1,5 +1,5 @@
-import { Card, Button, Badge, Col, Row, Typography } from 'antd';
-import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { Card,  Badge, Col, Row, Typography } from 'antd';
+import { CheckCircleOutlined } from '@ant-design/icons';
 import { useSearchParams } from 'react-router-dom';
 import { useVerifyOrderQuery } from '../redux/features/order/orderApi';
 import { useCurrentToken } from '../redux/features/auth/authSlice';
@@ -45,7 +45,7 @@ const OrderVerification = () => {
     const [searchParams] = useSearchParams();
     const token = useAppSelector(useCurrentToken);
     const orderId = searchParams.get("order_id");
-    const {data, isLoading} = useVerifyOrderQuery({order_id: orderId, token});
+    const {data} = useVerifyOrderQuery({order_id: orderId, token});
     const orderData: OrderData = data?.data?.[0];
 
   return (

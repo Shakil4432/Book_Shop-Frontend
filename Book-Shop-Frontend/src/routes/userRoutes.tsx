@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import Home from "../components/Home/Home";
 import AccountDetails from "../pages/user/AccountDetails";
 import Books from "../pages/Books";
-import CheakoutPage from "../pages/user/CheakoutPage";
+
 import Order from "../pages/user/OrderHistory";
 
 type TNavbarItem = {
@@ -38,11 +38,7 @@ export const userDashboardPath = [
     path: "order-history",
     element: <Order></Order>,
   },
-  {
-    name: "Checkout",
-    path: "checkout",
-    element: <CheakoutPage></CheakoutPage>,
-  },
+
   {
     name: "Account Details ",
     path: "account-details",

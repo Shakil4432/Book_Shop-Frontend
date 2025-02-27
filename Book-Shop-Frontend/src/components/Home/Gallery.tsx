@@ -1,4 +1,6 @@
+import { Button } from "antd";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const images = [
   "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg?t=st=1738339889~exp=1738343489~hmac=2d2456b72bb13fda3ec349562336342c5810337dc784dfca1854e33e9b6b8a88&w=826",
@@ -13,18 +15,18 @@ const images = [
 const Gallery = () => {
   return (
     <div className="overflow-hidden w-full">
-      {/* Main Heading */}
+     
       <h1 className="text-4xl text-center font-bold text-[#e7995e] mb-4">
         Explore Our Collection of Books
       </h1>
-      {/* Subheading */}
+      
       <h2 className="text-sm text-center font-semibold text-gray-800 mt-4 mb-12">
         Books Gallery
       </h2>
       <motion.div
-        className="flex space-x-4"
+        className="flex  space-x-4"
         drag="x"
-        dragConstraints={{ left: -500, right: 0 }} // Adjust based on images
+        dragConstraints={{ left: -500, right: 0 }} 
       >
         {images.map((img, index) => (
           <motion.div
@@ -39,7 +41,9 @@ const Gallery = () => {
             />
           </motion.div>
         ))}
+       
       </motion.div>
+      <div className="flex item-center justify-center py-8"><Link to="/books"><Button style={{background:"#e7995e",color:"white"}}>See All</Button></Link></div>
     </div>
   );
 };

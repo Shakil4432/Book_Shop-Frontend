@@ -1,11 +1,16 @@
 import { Table, Card, Typography, Spin, Tag } from "antd";
 import { useGetOrdersQuery } from "../../redux/features/order/orderApi";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 
 
 const { Title } = Typography;
 
 const OrderPage = () => {
-  const { data: orders, isLoading, isError } = useGetOrdersQuery(undefined);
+  const currentUser = useAppSelector(selectCurrentUser)
+  const { data: orders, isLoading, isError } = useGetOrdersQuery(currentUser?.email);
+
+  console.log(orders)
 
   const columns = [
     {

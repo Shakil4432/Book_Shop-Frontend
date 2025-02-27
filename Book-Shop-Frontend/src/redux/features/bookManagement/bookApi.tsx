@@ -7,6 +7,7 @@ const bookApi = baseApi.injectEndpoints({
         url: "/products/create-book",
         method: "POST",
         body: data,
+       
       }),
 
       invalidatesTags: [{ type: "Book", id: "LIST" }],
@@ -56,9 +57,13 @@ const bookApi = baseApi.injectEndpoints({
     }),
 
     deleteBook: builder.mutation({
-      query: (id) => ({
+      query: ({id,token}) => ({
         url: `/products/${id}`,
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }),
 
       invalidatesTags: [{ type: "Book", id: "LIST" }],

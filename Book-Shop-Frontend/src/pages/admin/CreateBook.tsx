@@ -1,20 +1,30 @@
-import { Button, Col, Row } from "antd";
-import { FieldValues } from "react-hook-form";
+import { Button, Col, Form, Input, Row } from "antd";
+import { Controller, FieldValues } from "react-hook-form";
 import BSForm from "../../components/form/BSForm";
 import BSInput from "../../components/form/BSInput";
 import { useAddBookMutation } from "../../redux/features/bookManagement/bookApi";
 
+
 const CreateBook = () => {
   const [addBook, { data, error }] = useAddBookMutation();
+  
   console.log(data);
   console.log(error);
   const onSubmit = async (data: FieldValues) => {
-    console.log(data);
     const formData = new FormData();
-    formData.append("data", JSON.stringify(data));
-
-    addBook(data);
+    formData.append("data", JSON.stringify({ 
+      name: data.name, 
+      brand: data.Brand,
+      price: Number(data.price),
+      model: data.model,
+      stock: Number(data.stock)
+    }));
+    formData.append("file", data.image); 
+  
+    addBook(formData);
+    
   };
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -42,6 +52,21 @@ const CreateBook = () => {
                 <Col span={24} md={{ span: 12 }} lg={{ span: 12 }}>
                   <BSInput type="number" name="stock" label="Stock" />
                 </Col>
+                <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <Controller
+                name="image"
+                render={({ field: { onChange, value, ...field } }) => (
+                  <Form.Item label="Picture">
+                    <Input
+                      type="file"
+                      value={value?.fileName}
+                      {...field}
+                      onChange={(e) => onChange(e.target.files?.[0])}
+                    />
+                  </Form.Item>
+                )}
+              />
+            </Col>
               </Row>
               <div className="flex justify-center mt-4">
                 <Button type="default" htmlType="submit">

@@ -20,7 +20,7 @@ const userApi = baseApi.injectEndpoints({
           }
         }
         return {
-          url: "/user",
+          url: "/users",
           method: "GET",
           params,
         };
@@ -68,7 +68,7 @@ const userApi = baseApi.injectEndpoints({
 
 export const {
   useAddUserMutation,
-  useGetAllUsersQuery,
+ useGetAllUsersQuery,
   useGetUserByIdQuery,
   useUpdateUserMutation,
   useDeleteUserMutation,

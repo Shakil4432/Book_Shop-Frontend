@@ -19,7 +19,7 @@ const Users = () => {
   const [filterRole, setFilterRole] = useState("");
   const currentUser = useAppSelector(selectCurrentUser)
 
-  // Fetch users with query parameters
+  
   const { data, isLoading, isError } = useGetAllUsersQuery({
     role: filterRole || undefined,
     search: searchTerm || undefined,
@@ -27,18 +27,18 @@ const Users = () => {
     limit: 4,
   });
 
-  console.log(data.data.name)
+  
 
   const users: TUserCard[] = data?.data?.result || [];
   const metaData = data?.data?.meta;
 
-  // Handle search input change
+  
   const handleSearch = (value: string) => {
     setSearchTerm(value);
     setPage(1);
   };
 
-  // Handle role filter change
+  
   const handleFilterChange = (value: string) => {
     setFilterRole(value);
     setPage(1);

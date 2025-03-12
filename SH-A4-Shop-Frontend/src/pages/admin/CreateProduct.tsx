@@ -8,7 +8,8 @@ import { useCurrentToken } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
 
 const CreateProduct = () => {
-  const [addBook] = useAddBookMutation();
+  const [addBook, { error }] = useAddBookMutation();
+  console.log(error);
   const token = useAppSelector(useCurrentToken);
 
   const onSubmit = async (data: FieldValues) => {

@@ -48,7 +48,7 @@ const BookDetails = () => {
           <strong>Name:</strong> {book.data.name}
         </h1>
         <h1 className="text-2xl font-bold text-[#2c3e50]">
-          <strong>Author:</strong> {book.data.brand}
+          <strong>Brand:</strong> {book.data.brand}
         </h1>
         <p className="text-lg text-gray-600">
           <strong>Stock:</strong> {book.data.stock}

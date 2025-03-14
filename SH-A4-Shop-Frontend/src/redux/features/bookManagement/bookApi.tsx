@@ -4,14 +4,14 @@ const bookApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     addBook: builder.mutation({
       query: ({ token, data }) => ({
-        url: "/products/create-book",
+        url: "/products/create-product",
         method: "POST",
         body: data,
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        // Do NOT set Content-Type; let the browser handle it
       }),
+      invalidatesTags: [{ type: "Book", id: "LIST" }],
     }),
 
     getAllBooks: builder.query({
@@ -29,7 +29,7 @@ const bookApi = baseApi.injectEndpoints({
         };
       },
 
-      providesTags: [{ type: "Book", id: "LIST" }],
+      providesTags: (result, error, args) => [{ type: "Book", id: "LIST" }],
     }),
 
     getBookById: builder.query({
@@ -37,7 +37,7 @@ const bookApi = baseApi.injectEndpoints({
         url: `/products/${id}`,
         method: "GET",
       }),
-      providesTags: (id) => [{ type: "Book", id }],
+      providesTags: (result, error, id) => [{ type: "Book", id }],
     }),
 
     updateBook: builder.mutation({
@@ -51,9 +51,9 @@ const bookApi = baseApi.injectEndpoints({
         },
       }),
 
-      invalidatesTags: ({ id }) => [
-        { type: "Book", id: "LIST" },
-        { type: "Book", id },
+      invalidatesTags: (result, error, { id }) => [
+        { type: "Book", id: "LIST" }, // Ensures list refetches
+        { type: "Book", id }, // Ensures specific book refetches
       ],
     }),
 

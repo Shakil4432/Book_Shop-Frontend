@@ -15,13 +15,16 @@ const Books = () => {
   const [sortBy, setSortBy] = useState("");
   const [filterBrand, setFilterBrand] = useState("");
 
-  const { data, isLoading, isError } = useGetAllBooksQuery({
-    brand: filterBrand || undefined,
-    search: searchTerm || undefined,
-    sort: sortBy || undefined,
-    page,
-    limit: 8,
-  });
+  const { data, isLoading, isError } = useGetAllBooksQuery(
+    {
+      brand: filterBrand || undefined,
+      search: searchTerm || undefined,
+      sort: sortBy || undefined,
+      page,
+      limit: 8,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
   const books: TBook[] = data?.data?.result || [];
   const metaData = data?.data?.meta;

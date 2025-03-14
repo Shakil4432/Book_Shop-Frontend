@@ -4,7 +4,7 @@ import AboutUs from "../pages/AboutUs";
 import { NavLink } from "react-router-dom";
 import Home from "../components/Home/Home";
 import AccountDetails from "../pages/user/AccountDetails";
-import Books from "../pages/Books";
+import Books from "../pages/Products";
 
 import Order from "../pages/user/OrderHistory";
 

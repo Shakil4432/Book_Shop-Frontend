@@ -13,37 +13,30 @@ import { useCurrentToken } from "../redux/features/auth/authSlice";
 
 const UpdateBook = () => {
   const { id } = useParams();
-  const navigate = useNavigate()
-  const { data: bookData, isLoading,refetch } = useGetBookByIdQuery(id);
+  const navigate = useNavigate();
+  const { data: bookData, isLoading, refetch } = useGetBookByIdQuery(id);
   const [updateBook, { data, error }] = useUpdateBookMutation();
 
- const token = useAppSelector(useCurrentToken)
-  console.log(token)
+  const token = useAppSelector(useCurrentToken);
+  console.log(token);
   console.log(data);
   console.log(error);
- 
 
   const onSubmit = async (formData: FieldValues) => {
-
     try {
       await updateBook({
         id,
         ...formData,
         price: Number(formData.price),
         stock: Number(formData.stock),
-        token
-       
+        token,
       });
-     
-      
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    
-   
-    refetch();
-    navigate("/books")
 
+    refetch();
+    navigate("/products");
   };
 
   if (isLoading) {

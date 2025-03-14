@@ -6,30 +6,72 @@ import { useAddBookMutation } from "../../redux/features/bookManagement/bookApi"
 import { useAppSelector } from "../../redux/hooks";
 import { useCurrentToken } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
-
+const imageHostingKey = import.meta.env.VITE_IMAGE_BB_API_KEY;
+console.log(imageHostingKey);
+const image_hosting_api_key = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 const CreateProduct = () => {
   const [addBook, { error }] = useAddBookMutation();
   console.log(error);
+
   const token = useAppSelector(useCurrentToken);
 
-  const onSubmit = async (data: FieldValues) => {
-    try {
-      const formData = new FormData();
-      formData.append(
-        "data",
-        JSON.stringify({
-          name: data.name,
-          brand: data.Brand, // Fix casing, backend expects `brand` not `Brand`
-          price: Number(data.price),
-          model: data.model,
-          stock: Number(data.stock),
-        })
-      );
-      formData.append("file", data.image); // Append image file
-      toast.success("Product created successfully");
+  const uploadImage = async (image: File) => {
+    if (!image) {
+      toast.error("No image selected!");
+      return null;
+    }
 
-      addBook({ token: token, data: formData }); // Send FormData instead of JSON
+    console.log("Uploading Image:", image); // ✅ Log the image file
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    try {
+      const response = await fetch(image_hosting_api_key, {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      console.log("ImgBB Response:", result); // ✅ Log response from ImgBB
+
+      if (!result.success) {
+        toast.error("Image upload failed!");
+        return null;
+      }
+
+      return result.data.url; // ✅ Return the image URL
+    } catch (error) {
+      console.error("Image Upload Error:", error);
+      toast.error("Image upload failed!");
+      return null;
+    }
+  };
+
+  const onSubmit = async (data: FieldValues) => {
+    if (!data.image) {
+      toast.error("Please upload an image");
+      return;
+    }
+    try {
+      const imageUrl = await uploadImage(data.image);
+      if (!imageUrl) return;
+
+      const productData = {
+        name: data.name,
+        brand: data.Brand,
+        price: Number(data.price),
+        model: data.model,
+        stock: Number(data.stock),
+        image: imageUrl,
+      };
+
+      console.log("Sending data:", productData);
+      addBook({ token, data: productData });
+
+      toast.success("Product created successfully");
     } catch (error: any) {
+      console.error("Error:", error);
       toast.error(error.message);
     }
   };

@@ -4,14 +4,17 @@ import {
   useDeleteBookMutation,
   useGetBookByIdQuery,
 } from "../redux/features/bookManagement/bookApi";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons"; 
-import { selectCurrentUser, useCurrentToken } from "../redux/features/auth/authSlice";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  selectCurrentUser,
+  useCurrentToken,
+} from "../redux/features/auth/authSlice";
 import { useAppSelector } from "../redux/hooks";
 
 const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const token = useAppSelector(useCurrentToken) 
+  const token = useAppSelector(useCurrentToken);
 
   const { data: book, isLoading, error } = useGetBookByIdQuery(id);
   console.log(book);
@@ -21,9 +24,9 @@ const BookDetails = () => {
 
   const handleDelete = async () => {
     try {
-      await deleteBook({id:id,token}).unwrap();
+      await deleteBook({ id: id, token }).unwrap();
       message.success("Book deleted successfully!");
-      navigate("/books");
+      navigate("/products");
     } catch (err) {
       message.error("Failed to delete the book.");
     }

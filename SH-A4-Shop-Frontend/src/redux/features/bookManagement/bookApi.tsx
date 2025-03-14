@@ -29,7 +29,7 @@ const bookApi = baseApi.injectEndpoints({
         };
       },
 
-      providesTags: (result, error, args) => [{ type: "Book", id: "LIST" }],
+      providesTags: () => [{ type: "Book", id: "LIST" }],
     }),
 
     getBookById: builder.query({
@@ -37,7 +37,7 @@ const bookApi = baseApi.injectEndpoints({
         url: `/products/${id}`,
         method: "GET",
       }),
-      providesTags: (result, error, id) => [{ type: "Book", id }],
+      providesTags: (id) => [{ type: "Book", id }],
     }),
 
     updateBook: builder.mutation({
@@ -51,7 +51,7 @@ const bookApi = baseApi.injectEndpoints({
         },
       }),
 
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: ({ id }) => [
         { type: "Book", id: "LIST" }, // Ensures list refetches
         { type: "Book", id }, // Ensures specific book refetches
       ],
